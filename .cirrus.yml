@@ -1,3 +1,17 @@
+env:
+  # Telegram
+  TG_CHAT: "@DumprXDumps"
+  TG_TOKEN: ENCRYPTED[d97b38fc916f5b418bdee35179170de5a921ccc7aef4bbdf33548a75cdb5e874cfeef6e4869526dd4ebf308a9fcdd2df]
+
+  # Gitlab
+  PUSH_TO_GITLAB: true
+  GITLAB_GROUP: DumprX
+  GITLAB_TOKEN: ENCRYPTED[4bf13a08acf30d4738403638464ea7c1ba3f5d157db84b9fbdac0ec0ab2b347dc89895ecabf01a36f37c6e87dff8d428]
+  GITLAB_INSTANCE: gitlab.taiao.ai
+
+  # Private SSH Key
+  PRIV_SSH_KEY: ENCRYPTED[0767bc608a75b9133cdf027bf29c05e405e794fbd133dd0da75e5b83f6983df4550dc95bb5e9d19371c8df543bc9a1e1]
+
 task:
   name: "Firmware Dump by DumprX"
   only_if: $CIRRUS_REPO_OWNER == 'DumprX'
@@ -32,3 +46,7 @@ task:
       - echo "${TG_TOKEN}" > .tg_token
       - echo "${GITLAB_INSTANCE}" > .gitlab_instance
       - bash setup.sh
+
+  DumprX_script:
+      - cd ~/DumprX
+      - ./dumper.sh https://bn.d.miui.com/V14.0.6.0.TKCINXM/miui_VEUXINGlobal_V14.0.6.0.TKCINXM_0d8c7b09f1_13.0.zip
